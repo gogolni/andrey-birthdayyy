@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b1b">
+  <title>Для Андрея — под одним небом</title>
+  <style>
+    :root{
+      --bg:#080b1b; --panel:rgba(18,23,49,.78); --line:rgba(194,190,255,.17);
+      --text:#f5f2ff; --muted:#b8b6d2; --pink:#f3b7d5; --lav:#b9b8ff;
+      --gold:#f4d99a; --shadow:0 24px 70px rgba(0,0,0,.34);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:radial-gradient(ellipse at 50% -15%,#25254c 0%,#10142b 35%,var(--bg) 72%);color:var(--text);font-family:Georgia,"Times New Roman",serif;line-height:1.65;overflow-x:hidden}
+    #stars{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:-1}
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(1080px,calc(100% - 36px));margin:auto}
+    .nav{position:sticky;top:0;z-index:10;background:rgba(8,11,27,.76);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0}
+    .brand{font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:var(--pink)}
+    .nav-links{display:flex;gap:17px;flex-wrap:wrap;font:12px/1.4 Arial,sans-serif;color:var(--muted)}
+    .nav-links a:hover{color:var(--pink)}
+    .music{border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--text);border-radius:99px;padding:9px 13px;cursor:pointer;font:12px Arial,sans-serif;white-space:nowrap}
+    .hero{min-height:84vh;display:grid;place-items:center;text-align:center;padding:90px 0 70px;position:relative}
+    .eyebrow{color:var(--gold);letter-spacing:.25em;text-transform:uppercase;font:11px Arial,sans-serif}
+    h1{font-size:clamp(48px,9vw,104px);line-height:.98;font-weight:400;letter-spacing:-.045em;margin:22px 0}
+    h1 span{color:var(--pink);font-style:italic}
+    .hero p{max-width:570px;margin:0 auto;color:var(--muted);font-size:18px}
+    .hero-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:30px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(243,183,213,.45);border-radius:99px;padding:12px 20px;background:linear-gradient(135deg,rgba(243,183,213,.2),rgba(185,184,255,.13));color:var(--text);cursor:pointer;font:13px Arial,sans-serif;transition:.2s}
+    .btn:hover{transform:translateY(-2px);background:rgba(243,183,213,.25)}
+    .scroll{position:absolute;bottom:25px;color:#8989ad;font:10px Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase}
+    section{padding:76px 0;scroll-margin-top:70px}
+    .section-head{margin-bottom:28px}
+    .kicker{color:var(--gold);font:10px Arial,sans-serif;letter-spacing:.22em;text-transform:uppercase}
+    h2{font-size:clamp(32px,5vw,48px);font-weight:400;line-height:1.1;margin:9px 0 8px}
+    .sub{color:var(--muted);max-width:650px;margin:0}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:clamp(20px,4vw,34px);box-shadow:var(--shadow);backdrop-filter:blur(10px)}
+    .timeline{display:grid;gap:14px}
+    .moment{display:grid;grid-template-columns:110px 1fr;gap:20px;padding:18px 0;border-bottom:1px solid var(--line)}
+    .moment:last-child{border:0}
+    .date{color:var(--pink);font:11px Arial,sans-serif;letter-spacing:.1em;padding-top:5px}
+    .moment h3,.reason h3{font-size:21px;font-weight:400;margin:0 0 5px}
+    .moment p,.reason p{margin:0;color:var(--muted);font-size:15px}
+    .letter{font-size:18px;white-space:pre-line;color:#e8e4f6}
+    .signature{color:var(--pink);font-style:italic;font-size:22px;margin-top:22px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .photo{min-height:220px;border-radius:18px;border:1px solid var(--line);overflow:hidden;position:relative;background:linear-gradient(145deg,#34365f,#171a36 65%,#49314e);display:flex;align-items:end;padding:17px}
+    .photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .photo:after{content:"";position:absolute;inset:30% 0 0;background:linear-gradient(transparent,rgba(5,7,20,.9))}
+    .photo span{position:relative;z-index:1;font-size:17px}
+    .hint{font:12px Arial,sans-serif;color:var(--muted);margin-top:14px}
+    .reasons{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .reason{padding:19px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.035)}
+    .num{color:var(--gold);font:11px Arial,sans-serif;letter-spacing:.12em;margin-bottom:7px}
+    .funny{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .funny-card{border:1px solid var(--line);border-radius:17px;padding:20px;background:rgba(255,255,255,.035)}
+    .funny-card p{color:var(--muted);margin:6px 0 0}
+    .quiz-q{font-size:20px;margin:0 0 16px}
+    .answers{display:grid;gap:9px}
+    .answer{border:1px solid var(--line);border-radius:13px;padding:12px 15px;background:rgba(255,255,255,.035);color:var(--text);text-align:left;cursor:pointer;font:14px Arial,sans-serif}
+    .answer:hover{border-color:var(--pink)}
+    .answer.selected{background:rgba(243,183,213,.16);border-color:var(--pink)}
+    #quiz-feedback{min-height:28px;color:var(--gold);margin-top:13px}
+    .surprise{text-align:center;padding:50px 25px}
+    .surprise .hidden-note{display:none;margin:24px auto 0;max-width:620px;color:#e9e3f5;font-size:20px;white-space:pre-line}
+    .surprise.open .hidden-note{display:block;animation:fade .7s ease}
+    @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+    footer{text-align:center;padding:35px 0 55px;color:#8989ad;font:12px Arial,sans-serif}
+    .tiny-star{color:var(--gold)}
+    @media(max-width:720px){.nav-links{display:none}.grid{grid-template-columns:1fr 1fr}.photo{min-height:170px}.reasons,.funny{grid-template-columns:1fr}.moment{grid-template-columns:1fr;gap:4px}.hero{min-height:78vh}}
+    @media(max-width:430px){.grid{grid-template-columns:1fr}.photo{min-height:210px}}
+  </style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top">✦ for Andrey</a>
+    <nav class="nav-links">
+      <a href="#story">История</a><a href="#letter">Письмо</a><a href="#photos">Фото</a>
+      <a href="#reasons">Причины</a><a href="#quiz">Викторина</a>
+    </nav>
+    <button class="music" id="musicBtn" type="button">♫ Включить музыку</button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero wrap">
+    <div>
+      <div class="eyebrow">один день · целая вселенная</div>
+      <h1>С днём рождения,<br><span>Andrey</span></h1>
+      <p>Сегодня даже звёзды немного подстроились, чтобы этот маленький уголок интернета был только для тебя.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#story">Начать путешествие</a>
+        <a class="btn" href="#surprise">К сюрпризу ↗</a>
+      </div>
+    </div>
+    <div class="scroll">↓ листай ниже</div>
+  </section>
+
+  <section id="story" class="wrap">
+    <div class="section-head"><div class="kicker">глава первая</div><h2>Наша история</h2><p class="sub">Некоторые люди постепенно становятся частью каждого дня. Здесь можно собрать маленькую летопись именно нашей истории.</p></div>
+    <div class="panel timeline" id="timeline">
+      <article class="moment"><div class="date">НАЧАЛО</div><div><h3>Когда всё началось</h3><p>Впиши сюда, как вы познакомились и что ты подумала о нём тогда.</p></div></article>
+      <article class="moment"><div class="date">ПЕРВЫЕ МЕСЯЦЫ</div><div><h3>Первые наши привычки</h3><p>Ваши первые долгие разговоры, игры, шутки и моменты, которые запомнились.</p></div></article>
+      <article class="moment"><div class="date">СЕЙЧАС</div><div><h3>И вот мы здесь</h3><p>Даже на расстоянии мы продолжаем создавать общие воспоминания. И это ещё не вся история.</p></div></article>
+    </div>
+  </section>
+
+  <section id="letter" class="wrap">
+    <div class="section-head"><div class="kicker">глава вторая</div><h2>Письмо тебе</h2></div>
+    <div class="panel">
+      <div class="letter" id="letterText">Андрей,
+
+С днём рождения! Я хочу, чтобы в новом году твоей жизни было больше спокойствия, радости и поводов гордиться собой.
+
+Мне дороги наши разговоры, наши привычные вечера, шутки, игры и даже те мелочи, которые со стороны могут показаться совершенно обычными. Для меня они часть нашей общей истории.
+
+Я желаю тебе не терять интерес к тому, что тебе нравится, встречать хороших людей, чаще улыбаться и помнить, что ты важен.
+
+Пусть впереди будет много хорошего. И пусть однажды у нас появится ещё больше воспоминаний, которые мы будем вспоминать вместе.
+
+С днём рождения ♡</div>
+      <div class="signature">Твоя Фатима ♡</div>
+    </div>
+  </section>
+
+  <section id="photos" class="wrap">
+    <div class="section-head"><div class="kicker">глава третья</div><h2>Моменты, которые хочется оставить</h2><p class="sub">Добавь сюда ваши скриншоты, фотографии или любые изображения, которые напоминают о вас.</p></div>
+    <div class="grid">
+      <div class="photo"><span>Наш любимый момент</span></div>
+      <div class="photo"><span>Смешной скриншот</span></div>
+      <div class="photo"><span>То, что поймём только мы</span></div>
+    </div>
+    <p class="hint">Чтобы вставить фото: положи файлы в папку assets и замени соответствующий блок на &lt;img src="assets/photo1.jpg" alt="Наш момент"&gt;.</p>
+  </section>
+
+  <section id="reasons" class="wrap">
+    <div class="section-head"><div class="kicker">глава четвёртая</div><h2>Почему я тебя ценю</h2><p class="sub">Не универсальный список, а несколько вещей, которые можно дополнить своими словами.</p></div>
+    <div class="reasons">
+      <article class="reason"><div class="num">01 / ТВОЙ ХАРАКТЕР</div><h3>За то, какой ты есть</h3><p>За твои особенности, мысли, привычки и то, что делает тебя именно тобой.</p></article>
+      <article class="reason"><div class="num">02 / НАШЕ ОБЩЕНИЕ</div><h3>За наши разговоры</h3><p>За то, что даже обычный вечер может стать воспоминанием.</p></article>
+      <article class="reason"><div class="num">03 / ЮМОР</div><h3>За наши глупости</h3><p>За шутки, которые не пришлось бы объяснять никому другому.</p></article>
+      <article class="reason"><div class="num">04 / БУДУЩЕЕ</div><h3>За то, что впереди</h3><p>За возможность однажды пережить вместе то, о чём мы пока только говорим.</p></article>
+    </div>
+  </section>
+
+  <section id="funny" class="wrap">
+    <div class="section-head"><div class="kicker">глава пятая</div><h2>Наши смешные моменты</h2><p class="sub">Здесь особенно нужны ваши настоящие локальные мемы. Чем непонятнее другим, тем лучше.</p></div>
+    <div class="funny">
+      <article class="funny-card"><div class="kicker">СЛУЧАЙ № 1</div><h3>Та самая ситуация</h3><p>Добавь сюда историю, от которой вы оба до сих пор смеётесь.</p></article>
+      <article class="funny-card"><div class="kicker">СЛУЧАЙ № 2</div><h3>Легендарная фраза</h3><p>Вставь вашу цитату или внутреннюю шутку.</p></article>
+      <article class="funny-card"><div class="kicker">СЛУЧАЙ № 3</div><h3>Игровая катастрофа</h3><p>Вспомни самый нелепый игровой момент.</p></article>
+      <article class="funny-card"><div class="kicker">СЛУЧАЙ № 4</div><h3>Без комментариев</h3><p>Оставь место для скриншота или истории, которую поймёте только вы.</p></article>
+    </div>
+  </section>
+
+  <section id="quiz" class="wrap">
+    <div class="section-head"><div class="kicker">небольшое испытание</div><h2>Насколько хорошо ты меня знаешь?</h2><p class="sub">Поменяй вопросы и варианты на ваши реальные факты. Сейчас это пример викторины.</p></div>
+    <div class="panel">
+      <p class="quiz-q" id="question">Какой формат нашего вечера стал привычным?</p>
+      <div class="answers" id="answers">
+        <button class="answer" data-correct="true">Игры и разговоры</button>
+        <button class="answer">Походы в горы каждую ночь</button>
+        <button class="answer">Совместная готовка завтрака в одной кухне</button>
+      </div>
+      <div id="quiz-feedback" aria-live="polite"></div>
+      <button class="btn" id="nextQuestion" type="button">Следующий вопрос</button>
+    </div>
+  </section>
+
+  <section id="surprise" class="wrap">
+    <div class="panel surprise" id="surpriseBox">
+      <div class="kicker">последняя глава</div>
+      <h2>И кое-что напоследок…</h2>
+      <p class="sub" style="margin:0 auto 22px">Ты дошёл до конца, но самое важное я оставила здесь.</p>
+      <button class="btn" id="revealBtn" type="button">Открыть сюрприз ♡</button>
+      <div class="hidden-note" id="secretText">Андрей, это не просто страница в интернете. Я собрала её, потому что хотела подарить тебе что-то, сделанное специально для тебя.
+
+Спасибо за нашу историю. Я надеюсь, что впереди у нас будет ещё много глав, много смеха и однажды — воспоминания не только по разные стороны экрана.
+
+С днём рождения. Ты заслуживаешь хорошего года. ♡</div>
+    </div>
+  </section>
+</main>
+<footer>Сделано с теплом и под одним небом <span class="tiny-star">✦</span></footer>
+
+<!-- Музыка: положи свой легально используемый MP3 в assets и назови our-song.mp3 -->
+<audio id="bgMusic" loop preload="none">
+  <source src="assets/our-song.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  // Звёздное небо
+  const canvas=document.getElementById('stars'),ctx=canvas.getContext('2d');
+  let stars=[];
+  function resize(){canvas.width=innerWidth*devicePixelRatio;canvas.height=innerHeight*devicePixelRatio;ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);stars=Array.from({length:Math.min(180,Math.floor(innerWidth/5))},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:Math.random()*1.35+.25,a:Math.random(),s:Math.random()*.012+.003}));}
+  function draw(){ctx.clearRect(0,0,innerWidth,innerHeight);for(const p of stars){p.a+=p.s;if(p.a>1||p.a<0)p.s*=-1;ctx.globalAlpha=.25+Math.abs(Math.sin(p.a))*0.7;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();}ctx.globalAlpha=1;requestAnimationFrame(draw);}
+  addEventListener('resize',resize);resize();draw();
+
+  // Музыка запускается только после нажатия пользователя
+  const music=document.getElementById('bgMusic'),musicBtn=document.getElementById('musicBtn');
+  let playing=false;
+  musicBtn.addEventListener('click',async()=>{
+    if(!playing){try{await music.play();playing=true;musicBtn.textContent='♫ Выключить музыку';}catch(e){musicBtn.textContent='Добавь MP3 в assets';}}
+    else{music.pause();playing=false;musicBtn.textContent='♫ Включить музыку';}
+  });
+
+  // Викторина. Добавь свои вопросы в массив ниже.
+  const questions=[
+    {q:'Какой формат нашего вечера стал привычным?',a:['Игры и разговоры','Походы в горы каждую ночь','Совместная готовка завтрака в одной кухне'],correct:0},
+    {q:'Что лучше всего добавить в наш сайт?',a:['Наши настоящие воспоминания','Случайный прогноз погоды','Инструкцию к холодильнику'],correct:0},
+    {q:'Что я хочу пожелать тебе в этот день?',a:['Хорошего года и много радости','Ещё больше домашних заданий','Чтобы интернет отключили навсегда'],correct:0}
+  ];
+  let qi=0;
+  const qEl=document.getElementById('question'),aEl=document.getElementById('answers'),fb=document.getElementById('quiz-feedback');
+  function renderQ(){const q=questions[qi];qEl.textContent=q.q;aEl.innerHTML='';q.a.forEach((v,i)=>{const b=document.createElement('button');b.className='answer';b.textContent=v;b.addEventListener('click',()=>{[...aEl.children].forEach(x=>x.disabled=true);b.classList.add('selected');fb.textContent=i===q.correct?'Верно! Ты меня хорошо знаешь ♡':'Не совсем, но попытка засчитана :)';});aEl.appendChild(b);});fb.textContent='';}
+  document.getElementById('nextQuestion').addEventListener('click',()=>{qi=(qi+1)%questions.length;renderQ();});renderQ();
+
+  document.getElementById('revealBtn').addEventListener('click',()=>{document.getElementById('surpriseBox').classList.add('open');document.getElementById('revealBtn').textContent='Сюрприз открыт ♡';});
+</script>
+</body>
+</html>
